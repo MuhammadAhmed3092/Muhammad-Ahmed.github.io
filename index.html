@@ -7,552 +7,303 @@
   <meta name="description" content="AI Engineer specialising in agentic systems, computer vision, and multimodal LLMs. Published researcher. IEEE Global Top 5 Finalist." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --navy:   #0A0F1E;
-      --navy2:  #111827;
-      --navy3:  #1A2235;
-      --teal:   #00D4AA;
-      --teal2:  #00B891;
-      --teal-dim: rgba(0, 212, 170, 0.12);
-      --teal-glow: rgba(0, 212, 170, 0.25);
-      --white:  #F0EDE6;
-      --slate:  #8892A4;
-      --slate2: #B8C0CC;
-      --border: rgba(255,255,255,0.07);
+      --navy:  #0A0F1E;
+      --navy2: #111827;
+      --navy3: #1A2235;
+      --teal:  #00D4AA;
+      --teal2: #00B891;
+      --teal-dim: rgba(0,212,170,0.1);
+      --white: #F0EDE6;
+      --slate: #8892A4;
+      --slate2:#B8C0CC;
+      --border:rgba(255,255,255,0.07);
     }
-
     html { scroll-behavior: smooth; }
+    body { background:var(--navy); color:var(--white); font-family:'Inter',sans-serif; font-size:16px; line-height:1.6; overflow-x:hidden; }
+    ::-webkit-scrollbar { width:4px; }
+    ::-webkit-scrollbar-track { background:var(--navy); }
+    ::-webkit-scrollbar-thumb { background:var(--teal); border-radius:2px; }
 
-    body {
-      background: var(--navy);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; background:rgba(10,15,30,0.88); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
+    .nav-logo { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.1rem; color:var(--teal); letter-spacing:-0.02em; }
+    .nav-links { display:flex; gap:2rem; list-style:none; }
+    .nav-links a { color:var(--slate2); text-decoration:none; font-size:0.875rem; font-weight:500; transition:color 0.2s; }
+    .nav-links a:hover { color:var(--teal); }
+    .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:0.75rem 1.75rem; background:var(--teal); color:var(--navy); font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:0.9rem; border:none; border-radius:6px; text-decoration:none; cursor:pointer; transition:background 0.2s, transform 0.15s; }
+    .btn-primary:hover { background:var(--teal2); transform:translateY(-1px); }
+    .btn-outline { display:inline-flex; align-items:center; gap:8px; padding:0.75rem 1.75rem; background:transparent; color:var(--white); font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:0.9rem; border:1px solid var(--border); border-radius:6px; text-decoration:none; cursor:pointer; transition:border-color 0.2s, color 0.2s, transform 0.15s; }
+    .btn-outline:hover { border-color:var(--teal); color:var(--teal); transform:translateY(-1px); }
 
-    /* ── Scrollbar ── */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--navy); }
-    ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 2px; }
+    /* SECTIONS */
+    .section-wrap { padding:5rem 2rem; max-width:1100px; margin:0 auto; }
+    .section-eyebrow { font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--teal); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.75rem; }
+    .section-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(1.75rem,3vw,2.5rem); font-weight:700; letter-spacing:-0.02em; color:var(--white); margin-bottom:2.5rem; }
 
-    /* ── Nav ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 2rem;
-      background: rgba(10, 15, 30, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700; font-size: 1.1rem;
-      color: var(--teal); letter-spacing: -0.02em;
-    }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      color: var(--slate2); text-decoration: none;
-      font-size: 0.875rem; font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--teal); }
+    /* HERO */
+    #hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding-top:5rem; max-width:100%; position:relative; overflow:hidden; }
+    .hero-inner { max-width:1100px; margin:0 auto; padding:0 2rem; width:100%; }
+    .hero-glow { position:absolute; width:600px; height:600px; border-radius:50%; background:radial-gradient(circle,rgba(0,212,170,0.07) 0%,transparent 70%); top:10%; right:-100px; pointer-events:none; }
+    .hero-eyebrow { display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--teal); margin-bottom:1.5rem; letter-spacing:0.05em; }
+    .hero-eyebrow::before { content:''; display:inline-block; width:32px; height:1px; background:var(--teal); }
+    .hero-name { font-family:'Space Grotesk',sans-serif; font-size:clamp(2.8rem,6vw,5rem); font-weight:700; line-height:1.05; letter-spacing:-0.03em; margin-bottom:1rem; }
+    .hero-role { font-family:'Space Grotesk',sans-serif; font-size:clamp(1.4rem,3vw,2rem); font-weight:500; color:var(--slate); margin-bottom:1.25rem; min-height:2.5rem; }
+    .hero-role .typed { color:var(--teal); border-right:2px solid var(--teal); animation:blink 0.8s step-end infinite; }
+    @keyframes blink { 50% { border-color:transparent; } }
+    .hero-bio { max-width:560px; color:var(--slate2); font-size:1rem; line-height:1.75; margin-bottom:2rem; }
+    .hero-bio strong { color:var(--white); font-weight:500; }
+    .hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:3rem; }
+    .hero-stats { display:flex; gap:2.5rem; flex-wrap:wrap; padding-top:2rem; border-top:1px solid var(--border); }
+    .stat-num { font-family:'Space Grotesk',sans-serif; font-size:1.75rem; font-weight:700; color:var(--teal); line-height:1; }
+    .stat-label { font-size:0.78rem; color:var(--slate); margin-top:3px; letter-spacing:0.03em; }
 
-    /* ── Sections ── */
-    section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+    /* RECOGNITION */
+    #recognition { border-top:1px solid var(--border); }
+    .achieve-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; }
+    .achieve-card { background:var(--navy2); border:1px solid var(--border); border-radius:10px; padding:1.5rem; display:flex; gap:1rem; align-items:flex-start; transition:border-color 0.2s; }
+    .achieve-card:hover { border-color:rgba(0,212,170,0.25); }
+    .achieve-icon { font-size:1.6rem; flex-shrink:0; }
+    .achieve-title { font-family:'Space Grotesk',sans-serif; font-size:0.95rem; font-weight:600; color:var(--white); margin-bottom:0.3rem; }
+    .achieve-desc { font-size:0.82rem; color:var(--slate2); line-height:1.55; }
 
-    /* ── Hero ── */
-    #hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      justify-content: center;
-      padding-top: 5rem;
-      max-width: 100%;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      width: 100%;
-    }
+    /* EXPERIENCE + SKILLS */
+    #experience { border-top:1px solid var(--border); }
+    .exp-skills-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+    .exp-list { display:flex; flex-direction:column; }
+    .exp-item { padding:1.5rem 0; border-bottom:1px solid var(--border); }
+    .exp-item:last-child { border-bottom:none; }
+    .exp-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.25rem; gap:1rem; }
+    .exp-role { font-family:'Space Grotesk',sans-serif; font-size:0.95rem; font-weight:600; color:var(--white); }
+    .exp-duration { font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--teal); white-space:nowrap; padding-top:3px; }
+    .exp-company { font-size:0.82rem; color:var(--slate2); margin-bottom:0.4rem; }
+    .exp-time { font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--slate); margin-bottom:0.5rem; }
+    .exp-desc { font-size:0.83rem; color:var(--slate2); line-height:1.65; }
+    .exp-dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--teal); margin-right:6px; vertical-align:middle; }
 
-    /* Ambient glow */
-    .hero-glow {
-      position: absolute;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,212,170,0.08) 0%, transparent 70%);
-      top: 10%; right: -100px;
-      pointer-events: none;
-    }
+    /* Skills side */
+    .skills-col { display:flex; flex-direction:column; gap:1.5rem; }
+    .skill-group-label { font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--teal); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.5rem; }
+    .skill-tags { display:flex; flex-wrap:wrap; gap:7px; }
+    .skill-tag { padding:4px 11px; background:var(--teal-dim); color:var(--slate2); border:1px solid rgba(0,212,170,0.18); border-radius:4px; font-size:0.75rem; font-family:'JetBrains Mono',monospace; }
 
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem; color: var(--teal);
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.05em;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 32px; height: 1px;
-      background: var(--teal);
-    }
+    /* PROJECTS */
+    #projects { border-top:1px solid var(--border); }
+    .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; }
+    .project-card { background:var(--navy2); border:1px solid var(--border); border-radius:12px; padding:1.75rem; transition:border-color 0.2s, transform 0.2s; display:flex; flex-direction:column; }
+    .project-card:hover { border-color:rgba(0,212,170,0.3); transform:translateY(-3px); }
+    .project-card.featured { border-color:rgba(0,212,170,0.18); }
+    .project-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; }
+    .project-icon { width:40px; height:40px; border-radius:8px; background:var(--teal-dim); display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
+    .project-links { display:flex; gap:12px; }
+    .project-link { color:var(--slate); font-size:0.8rem; text-decoration:none; transition:color 0.2s; }
+    .project-link:hover { color:var(--teal); }
+    .project-name { font-family:'Space Grotesk',sans-serif; font-size:1.05rem; font-weight:600; color:var(--white); margin-bottom:0.6rem; }
+    .project-desc { color:var(--slate2); font-size:0.875rem; line-height:1.65; flex:1; margin-bottom:1.25rem; }
+    .project-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:0.75rem; }
+    .project-tag { padding:3px 9px; background:var(--navy3); color:var(--slate); border:1px solid var(--border); border-radius:4px; font-size:0.7rem; font-family:'JetBrains Mono',monospace; }
+    .project-market { font-size:0.72rem; color:var(--teal); font-family:'JetBrains Mono',monospace; }
 
-    .hero-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      margin-bottom: 1rem;
-      color: var(--white);
-    }
+    /* RESEARCH */
+    #research { border-top:1px solid var(--border); }
+    .paper-card { background:var(--navy2); border:1px solid var(--border); border-left:3px solid var(--teal); border-radius:8px; padding:1.75rem; }
+    .paper-venue { font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--teal); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:0.6rem; }
+    .paper-title { font-family:'Space Grotesk',sans-serif; font-size:1.05rem; font-weight:600; color:var(--white); margin-bottom:0.5rem; line-height:1.4; }
+    .paper-authors { font-size:0.85rem; color:var(--slate2); margin-bottom:0.75rem; line-height:1.5; }
+    .paper-authors strong { color:var(--white); }
+    .paper-doi { font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--slate); }
+    .paper-doi a { color:var(--teal); text-decoration:none; }
+    .paper-doi a:hover { text-decoration:underline; }
 
-    /* Typewriter role */
-    .hero-role {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 500;
-      color: var(--slate);
-      margin-bottom: 1.5rem;
-      min-height: 2.5rem;
-    }
-    .hero-role .typed {
-      color: var(--teal);
-      border-right: 2px solid var(--teal);
-      animation: blink 0.8s step-end infinite;
-    }
-    @keyframes blink { 50% { border-color: transparent; } }
+    /* CONTACT */
+    #contact { border-top:1px solid var(--border); text-align:center; }
+    .contact-inner { max-width:560px; margin:0 auto; }
+    .contact-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(1.75rem,3vw,2.5rem); font-weight:700; letter-spacing:-0.02em; margin-bottom:1rem; }
+    .contact-desc { color:var(--slate2); margin-bottom:2rem; font-size:1rem; line-height:1.7; }
+    .contact-links { display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; }
+    .contact-link { display:flex; align-items:center; gap:8px; padding:0.65rem 1.25rem; border:1px solid var(--border); border-radius:6px; color:var(--slate2); text-decoration:none; font-size:0.85rem; font-weight:500; transition:border-color 0.2s, color 0.2s; }
+    .contact-link:hover { border-color:var(--teal); color:var(--teal); }
 
-    .hero-desc {
-      max-width: 580px;
-      color: var(--slate2);
-      font-size: 1.05rem;
-      line-height: 1.7;
-      margin-bottom: 2.5rem;
-    }
+    footer { text-align:center; padding:2rem; color:var(--slate); font-size:0.78rem; border-top:1px solid var(--border); font-family:'JetBrains Mono',monospace; }
 
-    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 0.75rem 1.75rem;
-      background: var(--teal); color: var(--navy);
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600; font-size: 0.9rem;
-      border: none; border-radius: 6px;
-      text-decoration: none; cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .btn-primary:hover { background: var(--teal2); transform: translateY(-1px); }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 0.75rem 1.75rem;
-      background: transparent;
-      color: var(--white);
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600; font-size: 0.9rem;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      text-decoration: none; cursor: pointer;
-      transition: border-color 0.2s, color 0.2s, transform 0.15s;
-    }
-    .btn-outline:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-1px); }
+    /* FADE IN */
+    .fade-in { opacity:0; transform:translateY(18px); transition:opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
 
-    /* Stats strip */
-    .hero-stats {
-      display: flex; gap: 2.5rem; flex-wrap: wrap;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
+    /* RESPONSIVE */
+    @media (max-width:768px) {
+      nav { padding:1rem; }
+      .nav-links { gap:1.25rem; }
+      .nav-links li:nth-child(n+4) { display:none; }
+      .exp-skills-grid { grid-template-columns:1fr; gap:2.5rem; }
     }
-    .stat-item { }
-    .stat-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.75rem; font-weight: 700;
-      color: var(--teal); line-height: 1;
+    @media (max-width:480px) {
+      .nav-links { display:none; }
+      .hero-stats { gap:1.5rem; }
     }
-    .stat-label {
-      font-size: 0.78rem; color: var(--slate);
-      margin-top: 3px; letter-spacing: 0.03em;
-    }
-
-    /* ── Section headers ── */
-    .section-header { margin-bottom: 3rem; }
-    .section-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem; color: var(--teal);
-      letter-spacing: 0.1em; text-transform: uppercase;
-      margin-bottom: 0.75rem;
-    }
-    .section-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
-      font-weight: 700; letter-spacing: -0.02em;
-      color: var(--white);
-    }
-
-    /* ── About ── */
-    #about { border-top: 1px solid var(--border); }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-    .about-text p {
-      color: var(--slate2);
-      margin-bottom: 1rem;
-      font-size: 1rem;
-      line-height: 1.75;
-    }
-    .about-text p strong { color: var(--white); font-weight: 500; }
-
-    .skills-grid {
-      display: flex; flex-direction: column; gap: 1.25rem;
-    }
-    .skill-group-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem; color: var(--teal);
-      letter-spacing: 0.08em; text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .skill-tag {
-      padding: 4px 12px;
-      background: var(--teal-dim);
-      color: var(--slate2);
-      border: 1px solid rgba(0,212,170,0.2);
-      border-radius: 4px;
-      font-size: 0.78rem;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* ── Projects ── */
-    #projects { border-top: 1px solid var(--border); }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-    }
-    .project-card {
-      background: var(--navy2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.75rem;
-      transition: border-color 0.2s, transform 0.2s;
-      display: flex; flex-direction: column;
-    }
-    .project-card:hover {
-      border-color: rgba(0,212,170,0.3);
-      transform: translateY(-3px);
-    }
-    .project-card.featured { border-color: rgba(0,212,170,0.2); }
-    .project-top {
-      display: flex; justify-content: space-between;
-      align-items: flex-start; margin-bottom: 1rem;
-    }
-    .project-icon {
-      width: 42px; height: 42px; border-radius: 8px;
-      background: var(--teal-dim);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.25rem;
-    }
-    .project-links { display: flex; gap: 12px; }
-    .project-link {
-      color: var(--slate);
-      font-size: 0.8rem; text-decoration: none;
-      display: flex; align-items: center; gap: 4px;
-      transition: color 0.2s;
-    }
-    .project-link:hover { color: var(--teal); }
-    .project-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.1rem; font-weight: 600;
-      color: var(--white); margin-bottom: 0.6rem;
-    }
-    .project-desc {
-      color: var(--slate2); font-size: 0.9rem;
-      line-height: 1.65; flex: 1;
-      margin-bottom: 1.25rem;
-    }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
-    .project-tag {
-      padding: 3px 9px;
-      background: var(--navy3);
-      color: var(--slate);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      font-size: 0.72rem;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .project-market {
-      font-size: 0.75rem; color: var(--teal);
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: 0.04em;
-    }
-
-    /* ── Research ── */
-    #research { border-top: 1px solid var(--border); }
-    .paper-card {
-      background: var(--navy2);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--teal);
-      border-radius: 8px;
-      padding: 1.75rem;
-      margin-bottom: 1rem;
-    }
-    .paper-venue {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem; color: var(--teal);
-      letter-spacing: 0.06em; text-transform: uppercase;
-      margin-bottom: 0.6rem;
-    }
-    .paper-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.05rem; font-weight: 600;
-      color: var(--white); margin-bottom: 0.5rem;
-      line-height: 1.4;
-    }
-    .paper-authors {
-      font-size: 0.85rem; color: var(--slate2);
-      margin-bottom: 0.75rem; line-height: 1.5;
-    }
-    .paper-authors strong { color: var(--white); }
-    .paper-doi {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem; color: var(--slate);
-    }
-    .paper-doi a { color: var(--teal); text-decoration: none; }
-    .paper-doi a:hover { text-decoration: underline; }
-
-    /* ── Experience ── */
-    #experience { border-top: 1px solid var(--border); }
-    .exp-list { display: flex; flex-direction: column; gap: 0; }
-    .exp-item {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 2rem;
-      padding: 2rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .exp-item:last-child { border-bottom: none; }
-    .exp-date {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem; color: var(--slate);
-      padding-top: 4px; line-height: 1.5;
-    }
-    .exp-dot {
-      display: inline-block;
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--teal); margin-right: 6px;
-      vertical-align: middle;
-    }
-    .exp-role {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1rem; font-weight: 600;
-      color: var(--white); margin-bottom: 0.2rem;
-    }
-    .exp-company {
-      font-size: 0.875rem; color: var(--teal);
-      margin-bottom: 0.6rem;
-    }
-    .exp-desc {
-      font-size: 0.875rem; color: var(--slate2);
-      line-height: 1.65;
-    }
-
-    /* ── Achievements ── */
-    #achievements { border-top: 1px solid var(--border); }
-    .achieve-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1rem;
-    }
-    .achieve-card {
-      background: var(--navy2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.5rem;
-      display: flex; gap: 1rem; align-items: flex-start;
-    }
-    .achieve-icon {
-      font-size: 1.75rem; flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .achieve-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.95rem; font-weight: 600;
-      color: var(--white); margin-bottom: 0.3rem;
-    }
-    .achieve-desc { font-size: 0.82rem; color: var(--slate2); line-height: 1.55; }
-
-    /* ── Contact ── */
-    #contact {
-      border-top: 1px solid var(--border);
-      text-align: center;
-    }
-    .contact-inner { max-width: 560px; margin: 0 auto; }
-    .contact-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
-      font-weight: 700; letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-    }
-    .contact-desc {
-      color: var(--slate2); margin-bottom: 2rem;
-      font-size: 1rem; line-height: 1.7;
-    }
-    .contact-links {
-      display: flex; justify-content: center;
-      gap: 1.25rem; flex-wrap: wrap;
-    }
-    .contact-link {
-      display: flex; align-items: center; gap: 8px;
-      padding: 0.65rem 1.25rem;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--slate2); text-decoration: none;
-      font-size: 0.85rem; font-weight: 500;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .contact-link:hover { border-color: var(--teal); color: var(--teal); }
-
-    /* ── Footer ── */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: var(--slate);
-      font-size: 0.8rem;
-      border-top: 1px solid var(--border);
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* ── Fade-in animation ── */
-    .fade-in {
-      opacity: 0; transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── Responsive ── */
-    @media (max-width: 768px) {
-      nav { padding: 1rem; }
-      .nav-links { gap: 1.25rem; }
-      .nav-links li:nth-child(n+4) { display: none; }
-      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    }
-    @media (max-width: 480px) {
-      .nav-links { display: none; }
-      .hero-stats { gap: 1.5rem; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in { opacity: 1; transform: none; transition: none; }
-      .typed { animation: none; }
+    @media (prefers-reduced-motion:reduce) {
+      .fade-in { opacity:1; transform:none; transition:none; }
+      .typed { animation:none; }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- Nav -->
-  <nav>
-    <span class="nav-logo">MA.</span>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#research">Research</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a href="mailto:muhammadahmed12072@gmail.com" class="btn-primary" style="padding:0.5rem 1.25rem; font-size:0.8rem;">
-      Hire Me
-    </a>
-  </nav>
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">MA.</span>
+  <ul class="nav-links">
+    <li><a href="#recognition">Recognition</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:muhammadahmed12072@gmail.com" class="btn-primary" style="padding:0.5rem 1.25rem;font-size:0.8rem;">Hire Me</a>
+</nav>
 
-  <!-- Hero -->
-  <section id="hero">
-    <div class="hero-glow"></div>
-    <div class="hero-inner">
-      <div class="hero-eyebrow">Available for freelance · Remote · Worldwide</div>
+<!-- HERO / ABOUT -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Open for Oppurtunities . KSA . USA . UAE</div>
+    <h1 class="hero-name">Muhammad<br>Ahmed</h1>
+    <div class="hero-role"><span id="typed-text" class="typed"></span></div>
 
-      <h1 class="hero-name">Muhammad<br>Ahmed</h1>
+    <p class="hero-bio">
+      AI Engineer based in <strong>Karachi, Pakistan</strong> — building agentic systems,
+      vision-language models, and production AI tools for clients in
+      <strong>UAE, KSA, and the US</strong>. Published researcher.
+      Internationally recognised founder. Currently working at
+      <strong>Aga Khan University</strong> and <strong>FAST-NUCES</strong>.
+    </p>
 
-      <div class="hero-role">
-        <span id="typed-text" class="typed"></span>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="https://github.com/MuhammadAhmed3092" target="_blank" class="btn-outline">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/muhammadahmed-ai7" target="_blank" class="btn-outline">LinkedIn ↗</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Production AI systems deployed</div>
       </div>
-
-      <p class="hero-desc">
-        I build AI systems that ship — from agentic pipelines and vision-language models
-        to production-deployed tools with real users. Published researcher.
-        Internationally recognised founder.
-      </p>
-
-      <div class="hero-ctas">
-        <a href="#projects" class="btn-primary">View Projects</a>
-        <a href="https://github.com/MuhammadAhmed3092" target="_blank" class="btn-outline">GitHub ↗</a>
-        <a href="https://www.linkedin.com/in/muhammadahmed-ai7" target="_blank" class="btn-outline">LinkedIn ↗</a>
+      <div class="stat-item">
+        <div class="stat-num">1 (3 more underway)</div>
+        <div class="stat-label">Peer-reviewed publication · MDPI 2026</div>
       </div>
+      <div class="stat-item">
+        <div class="stat-num">Top 5</div>
+        <div class="stat-label">Global · IEEE YESIST12 · Kuala Lumpur . Srilanka</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Years in applied AI R&D</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-num">2+</div>
-          <div class="stat-label">Production AI systems deployed</div>
+<!-- RECOGNITION -->
+<section id="recognition">
+  <div class="section-wrap">
+    <div class="fade-in">
+      <div class="section-eyebrow">// recognition</div>
+      <div class="section-title">Milestones.</div>
+    </div>
+    <div class="achieve-grid">
+      <div class="achieve-card fade-in">
+        <div class="achieve-icon">🏆</div>
+        <div>
+          <div class="achieve-title">IEEE YESIST12 · Global Top 5</div>
+          <div class="achieve-desc">EarthRenewal.AI ranked in the global top 5 at the IEEE YESIST 2025 &amp; Scientists international competition in Kuala Lumpur, Malaysia.</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-num">1</div>
-          <div class="stat-label">Peer-reviewed publication · MDPI 2026</div>
+      </div>
+      <div class="achieve-card fade-in">
+        <div class="achieve-icon">🌏</div>
+        <div>
+          <div class="achieve-title">International Recognition · Taipei</div>
+          <div class="achieve-desc">Represented Pakistan at an international technology summit in Taipei, Taiwan — recognised for innovation in robotic AI systems.</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-num">Top 5</div>
-          <div class="stat-label">Global · IEEE YESIST12 · Kuala Lumpur</div>
+      </div>
+      <div class="achieve-card fade-in">
+        <div class="achieve-icon">📄</div>
+        <div>
+          <div class="achieve-title">MDPI AgriEngineering · 2026</div>
+          <div class="achieve-desc">Peer-reviewed publication on agentic AI frameworks for smart agriculture. DOI: 10.3390/agriengineering8010008</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-num">3+</div>
-          <div class="stat-label">Years in applied AI R&D</div>
+      </div>
+      <div class="achieve-card fade-in">
+        <div class="achieve-icon">🎓</div>
+        <div>
+          <div class="achieve-title">B.S. Artificial Intelligence · FAST-NUCES</div>
+          <div class="achieve-desc">Graduated July 2025. Coursework in Generative AI, Deep Learning, Computer Vision, NLP, and Data Science.</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- About -->
-  <section id="about">
-    <div class="section-header fade-in">
-      <div class="section-eyebrow">// about</div>
-      <h2 class="section-title">Engineer by trade.<br>Researcher by instinct.</h2>
+<!-- EXPERIENCE + SKILLS -->
+<section id="experience">
+  <div class="section-wrap">
+    <div class="fade-in">
+      <div class="section-eyebrow">// experience &amp; skills</div>
+      <div class="section-title">Where I've worked.</div>
     </div>
 
-    <div class="about-grid">
-      <div class="about-text fade-in">
-        <p>
-          I'm an AI engineer based in <strong>Karachi, Pakistan</strong> with hands-on
-          experience across the full AI stack — from training deep learning models to
-          deploying production agentic systems used by real clients.
-        </p>
-        <p>
-          Currently conducting R&D in <strong>3D medical image segmentation</strong> at
-          Aga Khan University and collaborating on AI research under a funded grant at
-          FAST-NUCES. My published work focuses on agentic AI frameworks for smart agriculture.
-        </p>
-        <p>
-          I founded <strong>EarthRenewal.AI</strong> — a robotic multi-agent soil and
-          crop monitoring system — which competed at the global level and was recognised
-          in Kuala Lumpur and Taipei. I target freelance clients in
-          <strong>UAE, KSA, and the US</strong> market, particularly in document
-          intelligence, agentic automation, and computer vision.
-        </p>
+    <div class="exp-skills-grid">
+
+      <!-- Left: Experience timeline -->
+      <div class="exp-list">
+
+        <div class="exp-item fade-in">
+          <div class="exp-header">
+            <div class="exp-role"><span class="exp-dot"></span>AI Engineer (Part-Time)</div>
+            <div class="exp-duration">Mar 2026 – Present</div>
+          </div>
+          <div class="exp-company">Aga Khan University (AKU)</div>
+          <div class="exp-time">~3 months · Karachi, Pakistan</div>
+          <div class="exp-desc">Working on a confidential clinical AI project involving deep learning and 3D computer vision — developing an end-to-end pipeline integrating advanced segmentation models with immersive visualisation platforms.</div>
+        </div>
+
+        <div class="exp-item fade-in">
+          <div class="exp-header">
+            <div class="exp-role"><span class="exp-dot"></span>Research Assistant</div>
+            <div class="exp-duration">Apr 2026 – Present</div>
+          </div>
+          <div class="exp-company">FRGS Grant · FAST-NUCES</div>
+          <div class="exp-time">~2 months · Karachi, Pakistan</div>
+          <div class="exp-desc">Collaborating on funded AI research — literature review, model implementation, experimentation, and paper writing under a FAST-NUCES Faculty Research Support Grant.</div>
+        </div>
+
+        <div class="exp-item fade-in">
+          <div class="exp-header">
+            <div class="exp-role"><span class="exp-dot"></span>AI Engineer (Full-Time)</div>
+            <div class="exp-duration">Dec 2024 – Mar 2026</div>
+          </div>
+          <div class="exp-company">Zettamight</div>
+          <div class="exp-time">1 yr 4 months · Karachi, Pakistan</div>
+          <div class="exp-desc">Applied R&amp;D in computer vision, NLP, and agentic AI — transitioning research prototypes into scalable production systems. Designed multimodal AI assistants integrating vision, language, and speech.</div>
+        </div>
+
+        <div class="exp-item fade-in">
+          <div class="exp-header">
+            <div class="exp-role"><span class="exp-dot"></span>Co-Founder &amp; AI Lead</div>
+            <div class="exp-duration">2022 – 2025</div>
+          </div>
+          <div class="exp-company">EarthRenewal.AI</div>
+          <div class="exp-time">3 years · Pakistan (Nationwide)</div>
+          <div class="exp-desc">Founded and built a robotic AI startup for precision agriculture. Launched nationwide. Recognised as Global Top 5 at IEEE YESIST12 in Kuala Lumpur and at an international summit in Taipei.</div>
+        </div>
+
       </div>
 
-      <div class="skills-grid fade-in">
+      <!-- Right: Skills -->
+      <div class="skills-col fade-in">
         <div>
           <div class="skill-group-label">AI / ML</div>
           <div class="skill-tags">
@@ -564,6 +315,8 @@
             <span class="skill-tag">Vision LLMs</span>
             <span class="skill-tag">RAG</span>
             <span class="skill-tag">Agentic AI</span>
+            <span class="skill-tag">Prompt Engineering</span>
+            <span class="skill-tag">Quantization</span>
           </div>
         </div>
         <div>
@@ -585,6 +338,8 @@
             <span class="skill-tag">SQLite</span>
             <span class="skill-tag">ChromaDB</span>
             <span class="skill-tag">SSE Streaming</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">REST APIs</span>
           </div>
         </div>
         <div>
@@ -594,19 +349,22 @@
             <span class="skill-tag">Vercel</span>
             <span class="skill-tag">Render</span>
             <span class="skill-tag">GitHub Pages</span>
+            <span class="skill-tag">Docker</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Projects -->
-  <section id="projects">
-    <div class="section-header fade-in">
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-wrap">
+    <div class="fade-in">
       <div class="section-eyebrow">// projects</div>
-      <h2 class="section-title">Built, deployed,<br>and live.</h2>
+      <div class="section-title">Built, deployed, and live.</div>
     </div>
-
     <div class="projects-grid">
 
       <div class="project-card featured fade-in">
@@ -617,13 +375,8 @@
             <a href="https://muhammadahmed12072-invoice-and-receipt-intelligence.hf.space" target="_blank" class="project-link">Live ↗</a>
           </div>
         </div>
-        <div class="project-name">Invoice & Receipt Intelligence</div>
-        <div class="project-desc">
-          Vision AI system that processes bulk invoices and receipts — any format,
-          PDF or scanned image. Extracts vendor, line items, and totals with math
-          verification and a confidence score. Auto-approves high-confidence invoices,
-          flags anomalies for review. Exports to Excel, CSV, or JSON.
-        </div>
+        <div class="project-name">Invoice &amp; Receipt Intelligence</div>
+        <div class="project-desc">Vision AI system that processes bulk invoices and receipts — any format, PDF or scanned image. Extracts vendor, line items, and totals with math verification and a confidence score. Auto-approves high-confidence invoices, flags anomalies. Exports to Excel, CSV, or JSON.</div>
         <div class="project-tags">
           <span class="project-tag">Groq Vision</span>
           <span class="project-tag">llama-4-scout</span>
@@ -641,16 +394,11 @@
           <div class="project-icon">🧠</div>
           <div class="project-links">
             <a href="https://github.com/MuhammadAhmed3092/Multi-Agent-Research-Assistant" target="_blank" class="project-link">GitHub ↗</a>
-            <a href="#" class="project-link">Live ↗</a>
+            <a href="https://multi-agent-research-assistant-indol.vercel.app" target="_blank" class="project-link">Live ↗</a>
           </div>
         </div>
         <div class="project-name">Multi-Agent Research Assistant</div>
-        <div class="project-desc">
-          LangGraph-powered multi-agent system where specialist sub-agents
-          collaborate on deep research tasks — web search, PDF analysis, code
-          execution, and synthesis. Streams live agent progress to a React frontend.
-          Includes per-user quota limiting and full SQLite audit logs.
-        </div>
+        <div class="project-desc">LangGraph-powered multi-agent system where specialist sub-agents collaborate on deep research — web search, PDF analysis, code execution, and synthesis. Streams live agent progress. Includes per-user quota limiting and full SQLite audit logs.</div>
         <div class="project-tags">
           <span class="project-tag">LangGraph</span>
           <span class="project-tag">Groq</span>
@@ -665,17 +413,10 @@
       <div class="project-card fade-in">
         <div class="project-top">
           <div class="project-icon">🌱</div>
-          <div class="project-links">
-            <a href="https://earthrenewal.ai" target="_blank" class="project-link">Website ↗</a>
-          </div>
+          <div class="project-links"></div>
         </div>
         <div class="project-name">EarthRenewal.AI</div>
-        <div class="project-desc">
-          Robotic multi-agent soil and crop monitoring system deployed on an
-          autonomous vehicle. Fuses computer vision, deep learning plant
-          classification, and environmental sensor data to analyse soil-plant
-          health at scale. Launched nationwide in Pakistan.
-        </div>
+        <div class="project-desc">Robotic multi-agent soil and crop monitoring system deployed on an autonomous vehicle. Fuses computer vision, deep learning plant classification, and environmental sensors to analyse soil-plant health at scale. Launched nationwide in Pakistan.</div>
         <div class="project-tags">
           <span class="project-tag">Computer Vision</span>
           <span class="project-tag">Multi-agent</span>
@@ -689,231 +430,73 @@
       <div class="project-card fade-in">
         <div class="project-top">
           <div class="project-icon">🏥</div>
-          <div class="project-links">
-          </div>
+          <div class="project-links"></div>
         </div>
-        <div class="project-name">3D Medical Image Segmentation</div>
-        <div class="project-desc">
-          End-to-end deep learning pipeline for 3D medical image segmentation
-          and mesh generation at Aga Khan University, targeting clinical
-          visualisation on Meta Quest 3 and Unity for surgical planning
-          and medical education.
-        </div>
+        <div class="project-name">Clinical AI · Confidential</div>
+        <div class="project-desc">Deep learning pipeline for 3D medical image analysis — integrating advanced segmentation models with immersive visualisation platforms for clinical use. Ongoing at Aga Khan University.</div>
         <div class="project-tags">
           <span class="project-tag">3D Segmentation</span>
           <span class="project-tag">PyTorch</span>
-          <span class="project-tag">Unity</span>
-          <span class="project-tag">Meta Quest 3</span>
           <span class="project-tag">Medical AI</span>
+          <span class="project-tag">Computer Vision</span>
         </div>
-        <div class="project-market">↳ Healthcare · AKU R&D</div>
+        <div class="project-market">↳ Healthcare · AKU R&amp;D</div>
       </div>
 
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Research -->
-  <section id="research">
-    <div class="section-header fade-in">
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-wrap">
+    <div class="fade-in">
       <div class="section-eyebrow">// research</div>
-      <h2 class="section-title">Peer-reviewed work.</h2>
+      <div class="section-title">Peer-reviewed work.</div>
     </div>
-
     <div class="fade-in">
       <div class="paper-card">
         <div class="paper-venue">MDPI AgriEngineering · 2026 · Peer-reviewed</div>
-        <div class="paper-title">
-          Agentic AI Framework to Automate Traditional Farming for Smart Agriculture
-        </div>
-        <div class="paper-authors">
-          M. Murad, <strong>M. Ahmed</strong>, N. Ul Din, M. F. Shahid,
-          S. Siddiqui, M. H. Tanveer, R. C. Voicu
-        </div>
-        <div class="paper-doi">
-          DOI: <a href="https://doi.org/10.3390/agriengineering8010008" target="_blank">
-            10.3390/agriengineering8010008
-          </a>
-        </div>
+        <div class="paper-title">Agentic AI Framework to Automate Traditional Farming for Smart Agriculture</div>
+        <div class="paper-authors">M. Murad, <strong>M. Ahmed</strong>, N. Ul Din, M. F. Shahid, S. Siddiqui, M. H. Tanveer, R. C. Voicu</div>
+        <div class="paper-doi">DOI: <a href="https://doi.org/10.3390/agriengineering8010008" target="_blank">10.3390/agriengineering8010008</a></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Experience -->
-  <section id="experience">
-    <div class="section-header fade-in">
-      <div class="section-eyebrow">// experience</div>
-      <h2 class="section-title">Where I've worked.</h2>
-    </div>
-
-    <div class="exp-list">
-
-      <div class="exp-item fade-in">
-        <div class="exp-date">Mar 2026 – Present</div>
-        <div>
-          <div class="exp-role"><span class="exp-dot"></span>AI Engineer (Part-Time)</div>
-          <div class="exp-company">Aga Khan University (AKU)</div>
-          <div class="exp-desc">
-            R&D in 3D medical image segmentation and mesh generation for clinical
-            visualisation. Building an end-to-end pipeline integrating deep learning
-            segmentation with Meta Quest 3 and Unity for surgical planning and
-            medical education.
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item fade-in">
-        <div class="exp-date">Apr 2026 – Present</div>
-        <div>
-          <div class="exp-role"><span class="exp-dot"></span>Research Assistant</div>
-          <div class="exp-company">FRGS Grant · FAST-NUCES</div>
-          <div class="exp-desc">
-            Collaborating on AI research under a FAST-NUCES Faculty Research Support
-            Grant. Contributing to literature review, model implementation,
-            experimentation, and paper writing.
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item fade-in">
-        <div class="exp-date">Dec 2024 – Mar 2026</div>
-        <div>
-          <div class="exp-role"><span class="exp-dot"></span>AI Engineer (Full-Time)</div>
-          <div class="exp-company">Zettamight</div>
-          <div class="exp-desc">
-            Applied R&D in computer vision, NLP, and agentic AI — transitioning
-            research prototypes into scalable production systems. Designed multimodal
-            AI assistants integrating vision, language, and speech modalities.
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item fade-in">
-        <div class="exp-date">2022 – 2025</div>
-        <div>
-          <div class="exp-role"><span class="exp-dot"></span>Co-Founder</div>
-          <div class="exp-company">EarthRenewal.AI</div>
-          <div class="exp-desc">
-            Founded and built a robotic AI startup for precision agriculture.
-            Launched nationwide in Pakistan. Recognised as Global Top 5 at
-            IEEE YESIST12 in Kuala Lumpur and received international recognition
-            in Taipei, Taiwan.
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Achievements -->
-  <section id="achievements">
-    <div class="section-header fade-in">
-      <div class="section-eyebrow">// recognition</div>
-      <h2 class="section-title">Milestones.</h2>
-    </div>
-    <div class="achieve-grid">
-      <div class="achieve-card fade-in">
-        <div class="achieve-icon">🏆</div>
-        <div>
-          <div class="achieve-title">IEEE YESIST12 Global Top 5</div>
-          <div class="achieve-desc">EarthRenewal.AI ranked in the global top 5 at the IEEE Young Engineers & Scientists international competition in Kuala Lumpur, Malaysia.</div>
-        </div>
-      </div>
-      <div class="achieve-card fade-in">
-        <div class="achieve-icon">📄</div>
-        <div>
-          <div class="achieve-title">MDPI AgriEngineering Publication</div>
-          <div class="achieve-desc">Peer-reviewed paper published in MDPI AgriEngineering (2026) on agentic AI frameworks for smart agriculture automation.</div>
-        </div>
-      </div>
-      <div class="achieve-card fade-in">
-        <div class="achieve-icon">🌏</div>
-        <div>
-          <div class="achieve-title">International Recognition · Taipei</div>
-          <div class="achieve-desc">EarthRenewal.AI received recognition at an international summit in Taipei, Taiwan, representing Pakistan on the global stage.</div>
-        </div>
-      </div>
-      <div class="achieve-card fade-in">
-        <div class="achieve-icon">🎓</div>
-        <div>
-          <div class="achieve-title">B.S. Artificial Intelligence · FAST-NUCES</div>
-          <div class="achieve-desc">Graduated July 2025. Coursework in Generative AI, Deep Learning, Computer Vision, NLP, and Data Science.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact">
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
     <div class="contact-inner fade-in">
-      <div class="section-eyebrow" style="text-align:center; margin-bottom:1rem;">// contact</div>
+      <div class="section-eyebrow" style="text-align:center;margin-bottom:1rem;">// contact</div>
       <h2 class="contact-title">Let's build<br>something together.</h2>
-      <p class="contact-desc">
-        Open to freelance projects in agentic AI, document intelligence,
-        computer vision, and LLM integration. Targeting clients in UAE, KSA, and the US.
-      </p>
+      <p class="contact-desc">Open to freelance projects in agentic AI, document intelligence, computer vision, and LLM integration. Targeting clients in UAE, KSA, and the US.</p>
       <div class="contact-links">
-        <a href="mailto:muhammadahmed12072@gmail.com" class="contact-link">
-          ✉ muhammadahmed12072@gmail.com
-        </a>
-        <a href="https://github.com/MuhammadAhmed3092" target="_blank" class="contact-link">
-          GitHub ↗
-        </a>
-        <a href="https://www.linkedin.com/in/muhammadahmed-ai7" target="_blank" class="contact-link">
-          LinkedIn ↗
-        </a>
-        <a href="https://huggingface.co/MuhammadAhmed12072" target="_blank" class="contact-link">
-          HuggingFace ↗
-        </a>
+        <a href="mailto:muhammadahmed12072@gmail.com" class="contact-link">✉ Email</a>
+        <a href="https://github.com/MuhammadAhmed3092" target="_blank" class="contact-link">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/muhammadahmed-ai7" target="_blank" class="contact-link">LinkedIn ↗</a>
+        <a href="https://huggingface.co/MuhammadAhmed12072" target="_blank" class="contact-link">HuggingFace ↗</a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    Built by Muhammad Ahmed · 2026 · Karachi, Pakistan
-  </footer>
+<footer>Built by Muhammad Ahmed</footer>
 
-  <script>
-    // ── Typewriter ──────────────────────────────────────────────────────────
-    const roles = [
-      "AI Engineer",
-      "Agentic Systems Builder",
-      "Published Researcher",
-      "Computer Vision Engineer",
-      "LLM Integration Specialist",
-      "IEEE Global Top 5 Finalist",
-    ];
-    let roleIdx = 0, charIdx = 0, deleting = false;
-    const el = document.getElementById("typed-text");
-
-    function type() {
-      const current = roles[roleIdx];
-      if (!deleting) {
-        el.textContent = current.slice(0, ++charIdx);
-        if (charIdx === current.length) {
-          deleting = true;
-          setTimeout(type, 2000);
-          return;
-        }
-      } else {
-        el.textContent = current.slice(0, --charIdx);
-        if (charIdx === 0) {
-          deleting = false;
-          roleIdx = (roleIdx + 1) % roles.length;
-        }
-      }
-      setTimeout(type, deleting ? 40 : 80);
-    }
-    type();
-
-    // ── Scroll fade-in ───────────────────────────────────────────────────────
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add("visible");
-      }),
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
-  </script>
-
+<script>
+  const roles = ["AI Engineer","Agentic Systems Builder","Published Researcher","Computer Vision Engineer","LLM Integration Specialist","IEEE Global Top 5 Finalist"];
+  let rIdx=0,cIdx=0,del=false;
+  const el=document.getElementById("typed-text");
+  function type(){
+    const cur=roles[rIdx];
+    if(!del){el.textContent=cur.slice(0,++cIdx);if(cIdx===cur.length){del=true;setTimeout(type,2000);return;}}
+    else{el.textContent=cur.slice(0,--cIdx);if(cIdx===0){del=false;rIdx=(rIdx+1)%roles.length;}}
+    setTimeout(type,del?40:80);
+  }
+  type();
+  const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible");}),{threshold:0.1});
+  document.querySelectorAll(".fade-in").forEach(e=>obs.observe(e));
+</script>
 </body>
 </html>
